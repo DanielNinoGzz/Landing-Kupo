@@ -1,0 +1,18 @@
+:root{
+--space-section-y:108px;--space-section-x:40px;--space-section-x-mobile:22px;--space-section-y-mobile:68px;
+--container-narrow:660px;--container:1140px;--container-wide:1180px;--container-nav:1320px;--container-nav-float:1060px;
+--gap-grid:18px;--gap-grid-lg:22px;--gap-cards:20px;
+--pad-card:30px;--pad-card-lg:38px;--pad-step:34px 30px;
+/* Radii */
+--radius-pill:100px;--radius-sm:7px;--radius-badge:10px;--radius-md:12px;--radius-tab:16px;--radius-nav:18px;--radius-card:20px;--radius-frame:24px;--radius-card-lg:26px;--radius-hero-frame:28px;--radius-inner-frame:14px;
+/* Shadows */
+--shadow-btn:0 8px 30px rgba(10,10,10,0.18);--shadow-btn-sm:0 6px 24px rgba(10,10,10,0.2);
+--shadow-hover:0 16px 48px rgba(10,10,10,0.10);--shadow-tab:0 12px 32px rgba(10,10,10,0.10);
+--shadow-card-color:0 24px 64px rgba(10,10,10,0.10);--shadow-nav:0 8px 32px rgba(10,10,10,0.10), inset 0 1px 0 rgba(255,255,255,0.7);
+--shadow-menu:0 22px 60px rgba(10,10,10,0.16);--shadow-form:0 30px 80px rgba(10,27,61,0.2);
+--shadow-frame:0 40px 110px rgba(28,110,142,0.3);--shadow-inner:0 18px 50px rgba(0,0,0,0.3);
+/* Motion */
+--ease-standard:cubic-bezier(.4,0,.2,1);/* @kind other */--ease-pop:cubic-bezier(.34,1.56,.64,1);/* @kind other */
+--dur-fast:.2s;/* @kind other */--dur-base:.25s;/* @kind other */--dur-menu:.28s;/* @kind other */--dur-nav:.45s;/* @kind other */--dur-reveal:.65s;/* @kind other */
+--blur-glass:blur(22px) saturate(1.5);/* @kind other */
+}

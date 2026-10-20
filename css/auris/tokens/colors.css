@@ -1,0 +1,30 @@
+:root{
+/* Ink & neutrals (warm greys) */
+--au-ink:#0A0A0A;--au-ink-2:#3A3A36;--au-ink-3:#5B5B57;--au-ink-4:#9A9A92;
+--au-white:#FFFFFF;--au-paper:#FAFAF8;--au-paper-2:#F1F1EF;
+/* Ink alphas — borders, fills, hover */
+--au-line-06:rgba(10,10,10,0.06);--au-line-07:rgba(10,10,10,0.07);--au-line-08:rgba(10,10,10,0.08);--au-line-10:rgba(10,10,10,0.10);--au-line-12:rgba(10,10,10,0.12);--au-line-18:rgba(10,10,10,0.18);--au-line-22:rgba(10,10,10,0.22);--au-line-28:rgba(10,10,10,0.28);
+--au-fill-03:rgba(10,10,10,0.03);--au-fill-04:rgba(10,10,10,0.04);--au-fill-05:rgba(10,10,10,0.05);--au-fill-06:rgba(10,10,10,0.06);
+/* Ocean (primary accent) */
+--au-ocean-100:#F4EFCB;--au-ocean-200:#EDE7C2;--au-ocean-300:#6FB6CE;--au-ocean-400:#5AA0BC;--au-ocean-500:#3E8FAE;--au-ocean-600:#2F7D9C;--au-ocean-700:#1C6E8E;--au-ocean-900:#0A1B3D;
+/* Moss */
+--au-moss-300:#5fa86a;--au-moss-400:#4f8f73;--au-moss-600:#2f7d4a;--au-sand-300:#d8c98a;--au-sand-400:#cdc7a4;
+/* Clay */
+--au-clay-300:#dd9a5e;--au-clay-200:#e7c08c;--au-clay-250:#E7B988;--au-clay-600:#C9743C;
+/* Semantic */
+--au-error:#E05A5A;--au-dot-red:#E5675C;--au-dot-amber:#E6B34D;
+/* Aliases */
+--text-strong:var(--au-ink);--text-body:var(--au-ink-3);--text-label:var(--au-ink-2);--text-muted:var(--au-ink-4);--text-on-color:#fff;--text-on-color-soft:rgba(255,255,255,0.85);
+--surface-page:var(--au-white);--surface-alt:var(--au-paper);--surface-card:var(--au-white);--surface-input:var(--au-paper);--surface-inverse:var(--au-ink);--surface-chrome:var(--au-paper-2);
+--border-subtle:var(--au-line-06);--border-card:var(--au-line-08);--border-control:var(--au-line-10);--border-hover:var(--au-line-22);
+/* Grainy gradient fills */
+--grad-ocean:radial-gradient(85% 90% at 18% 12%, #6FB6CE 0%, transparent 58%), radial-gradient(90% 100% at 88% 95%, #1C6E8E 0%, transparent 58%), linear-gradient(150deg,#1C6E8E 0%,#0A1B3D 100%);/* @kind color */
+--grad-moss:radial-gradient(85% 90% at 16% 14%, #5fa86a 0%, transparent 56%), radial-gradient(90% 100% at 90% 92%, #d8c98a 0%, transparent 58%), linear-gradient(150deg,#2f7d4a 0%,#cdc7a4 100%);/* @kind color */
+--grad-clay:radial-gradient(85% 90% at 20% 12%, #dd9a5e 0%, transparent 56%), radial-gradient(90% 100% at 88% 95%, #e7c08c 0%, transparent 58%), linear-gradient(150deg,#C9743C 0%,#E7B988 100%);/* @kind color */
+--grad-tide:radial-gradient(60% 90% at 10% 22%, #2F7D9C 0%, transparent 55%), radial-gradient(70% 100% at 82% 78%, #F4EFCB 0%, transparent 55%), radial-gradient(90% 100% at 55% 50%, #EDE7C2 0%, transparent 62%), linear-gradient(135deg,#5AA0BC 0%,#F4EFCB 100%);/* @kind color */
+--grad-lagoon:radial-gradient(70% 90% at 14% 20%, #2F7D9C 0%, transparent 58%), radial-gradient(80% 90% at 88% 35%, #1C6E8E 0%, transparent 58%), radial-gradient(90% 100% at 55% 105%, #F4EFCB 0%, transparent 60%), linear-gradient(135deg,#3E8FAE,#3E8FAE);/* @kind color */
+--grad-meadow:radial-gradient(60% 90% at 10% 22%, #2f7d4a 0%, transparent 55%), radial-gradient(70% 100% at 82% 78%, #d8c98a 0%, transparent 55%), radial-gradient(90% 100% at 55% 50%, #cdc7a4 0%, transparent 62%), linear-gradient(135deg,#4f8f73 0%,#d8c98a 100%);/* @kind color */
+--grad-text-1:linear-gradient(110deg,#3E8FAE,#1C6E8E 55%,#6FB6CE);/* @kind color */
+--grad-text-2:linear-gradient(110deg,#2F7D9C,#6FB6CE 55%,#F4EFCB);/* @kind color */
+--grad-check:linear-gradient(135deg,#2F7D9C,#6FB6CE);/* @kind color */
+}

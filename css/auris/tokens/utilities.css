@@ -1,0 +1,13 @@
+@keyframes au-blink{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.3;transform:scale(1.6)}}
+@keyframes au-shake{0%,100%{transform:translateX(0)}20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+@keyframes au-pop{from{transform:scale(0);opacity:0}to{transform:scale(1);opacity:1}}
+@keyframes au-float{0%,100%{transform:translate(0,0)}50%{transform:translate(0,-22px)}}
+@keyframes au-marquee{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.au-grain{position:relative;overflow:hidden}
+.au-grain::before{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/%3E%3C/svg%3E");mix-blend-mode:overlay;opacity:0.5;pointer-events:none}
+.au-grain>*{position:relative;z-index:1}
+.au-btn-ghost{transition:background .25s ease,border-color .25s ease,transform .25s ease}
+.au-btn-ghost:hover{background:rgba(10,10,10,0.06)!important;border-color:rgba(10,10,10,0.18)!important;transform:translateY(-1px)}
+.au-lang{cursor:pointer;user-select:none;transition:border-color .2s,background .2s}
+.au-lang:hover{border-color:rgba(10,10,10,0.28)!important;background:rgba(10,10,10,0.04)!important}
+.au-marquee-track:hover{animation-play-state:paused}

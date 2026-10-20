@@ -1,3 +1,4 @@
+/** @OnlyCurrentDoc */
 // Recibe las solicitudes de demo de la landing de KUPO y las guarda en esta hoja de cálculo.
 // Instrucciones de instalación en README.md, sección "Solicitudes de demo en Google Sheets".
 

@@ -1035,6 +1035,6 @@ ${v.demoOpen ? html`
 }
 
 // sheetsUrl: Google Apps Script web app URL that stores demo requests (see README).
-Kupo.defaultProps = { headline: 'B', animateHero: true, displayFont: 'Unbounded', demoUrl: '', sheetsUrl: '' };
+Kupo.defaultProps = { headline: 'B', animateHero: true, displayFont: 'Unbounded', demoUrl: '', sheetsUrl: 'https://script.google.com/macros/s/AKfycbyODJ-zo7_A3ncEn44zfwMyDIL7Bseg-pqoe_Iwe2-3KNFV_rU98keoz8C2X4M6lxRrgw/exec' };
 
 render(html`<${Kupo} />`, document.getElementById('app'));

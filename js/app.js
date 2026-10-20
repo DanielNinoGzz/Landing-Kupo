@@ -45,7 +45,7 @@ const html = htm.bind(hx);
 
 class Kupo extends Component {
   trackRef = createRef();
-  state = { w: window.innerWidth, scrolled: false, menu: false, slide: 0, faq: 0, demo: false, dstep: 0, biz: '', chans: {}, derr: false, fName: '', fBiz: '', fContact: '', step: 0, sel: 0, tab: 'todas', modes: {}, rstep: 0, rAuto: true, apt: 'v', ind: 1 };
+  state = { w: window.innerWidth, scrolled: false, menu: false, slide: 0, faq: 0, demo: false, dstep: 0, biz: '', chans: {}, derr: false, fName: '', fBiz: '', fContact: '', fTrap: '', dSending: false, dFail: false, step: 0, sel: 0, tab: 'todas', modes: {}, rstep: 0, rAuto: true, apt: 'v', ind: 1 };
 
   componentDidMount() {
     this.rm = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -80,8 +80,26 @@ class Kupo extends Component {
     if (t.scrollLeft + t.clientWidth >= t.scrollWidth - 4) best = t.children.length - 1;
     if (best !== this.state.slide) this.setState({ slide: best });
   };
-  openDemo = e => { if (e && e.preventDefault) e.preventDefault(); document.body.style.overflow = 'hidden'; this.setState({ demo: true, dstep: 0, biz: '', chans: {}, derr: false, menu: false }); };
+  openDemo = e => { if (e && e.preventDefault) e.preventDefault(); document.body.style.overflow = 'hidden'; this.setState({ demo: true, dstep: 0, biz: '', chans: {}, derr: false, dFail: false, menu: false }); };
   closeDemo = () => { document.body.style.overflow = ''; this.setState({ demo: false }); };
+  sendDemo = async () => {
+    const S = this.state;
+    if (S.dSending) return;
+    if (!S.fName.trim() || !S.fContact.trim()) { this.setState({ derr: true }); return; }
+    const url = (this.props.sheetsUrl || '').trim();
+    if (!url) { console.warn('KUPO: define sheetsUrl en Kupo.defaultProps para guardar las solicitudes de demo.'); this.setState({ dstep: 3 }); return; }
+    const names = { wa: 'WhatsApp', ig: 'Instagram', ms: 'Messenger' };
+    const body = new URLSearchParams({ nombre: S.fName.trim(), negocio: S.fBiz.trim(), contacto: S.fContact.trim(), giro: S.biz,
+      canales: ['wa', 'ig', 'ms'].filter(k => S.chans[k]).map(k => names[k]).join(', '), pagina: location.href, website: S.fTrap });
+    this.setState({ dSending: true, dFail: false });
+    try {
+      // Apps Script doesn't answer CORS preflights, so this goes as a simple request with an opaque response.
+      await fetch(url, { method: 'POST', mode: 'no-cors', body });
+      this.setState({ dSending: false, dstep: 3 });
+    } catch (err) {
+      this.setState({ dSending: false, dFail: true });
+    }
+  };
   startHero() {
     clearTimeout(this._t);
     if (this.rm || this.props.animateHero === false) { this.setState({ step: 6 }); return; }
@@ -281,8 +299,10 @@ class Kupo extends Component {
       fName: S.fName, fBiz: S.fBiz, fContact: S.fContact, derr: S.derr,
       setName: e => this.setState({ fName: e.target.value, derr: false }),
       setBizName: e => this.setState({ fBiz: e.target.value }),
+      fTrap: S.fTrap, setTrap: e => this.setState({ fTrap: e.target.value }),
+      dSending: S.dSending, dFail: S.dFail,
       setContact: e => this.setState({ fContact: e.target.value, derr: false }),
-      dSubmit: () => { if (!S.fName.trim() || !S.fContact.trim()) { this.setState({ derr: true }); return; } this.setState({ dstep: 3 }); },
+      dSubmit: this.sendDemo,
       dFirst: (S.fName.trim().split(' ')[0]) || '',
       dSummary: [S.biz, S.fBiz.trim(), ...['wa', 'ig', 'ms'].filter(k => S.chans[k]).map(k => CH[k].n)].filter(Boolean),
       hasDemoUrl: !!demo,
@@ -988,8 +1008,10 @@ ${v.demoOpen ? html`
             <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:var(--au-ink-2)">Tu nombre<input type="text" value=${v.fName} onInput=${v.setName} placeholder="Ej. Sofía Garza" style="width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #E4DEFF;background:#F7F5FF;font-family:inherit;font-size:15px;color:var(--au-ink);outline:none;transition:border-color .2s ease,background .2s ease" style-focus="border-color:#6E44FF;background:#fff" /></label>
             <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:var(--au-ink-2)">Nombre del negocio<input type="text" value=${v.fBiz} onInput=${v.setBizName} placeholder="Ej. Estudio Alba" style="width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #E4DEFF;background:#F7F5FF;font-family:inherit;font-size:15px;color:var(--au-ink);outline:none;transition:border-color .2s ease,background .2s ease" style-focus="border-color:#6E44FF;background:#fff" /></label>
             <label style="display:flex;flex-direction:column;gap:7px;font-size:13px;font-weight:600;color:var(--au-ink-2)">WhatsApp o correo<input type="text" value=${v.fContact} onInput=${v.setContact} placeholder="Ej. +52 81 1234 5678" style="width:100%;padding:14px 16px;border-radius:14px;border:1.5px solid #E4DEFF;background:#F7F5FF;font-family:inherit;font-size:15px;color:var(--au-ink);outline:none;transition:border-color .2s ease,background .2s ease" style-focus="border-color:#6E44FF;background:#fff" /></label>
+            <div aria-hidden="true" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);opacity:0"><label>Sitio web<input type="text" name="website" tabindex="-1" autocomplete="off" value=${v.fTrap} onInput=${v.setTrap} /></label></div>
             ${v.derr ? html`<p role="alert" style="margin:0;font-size:13px;color:#B23A2E">Escribe tu nombre y un medio de contacto.</p>` : null}
-            <button onClick=${v.dSubmit} style="width:100%;padding:15px;border-radius:100px;border:none;background:#5B37F0;color:#fff;font-family:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:background .2s ease,transform .2s ease" style-hover="background:#4B2BC9" style-active="transform:scale(.98)">Solicitar demo</button>
+            ${v.dFail ? html`<p role="alert" style="margin:0;font-size:13px;color:#B23A2E">No pudimos enviar tu solicitud. Revisa tu conexión e intenta de nuevo.</p>` : null}
+            <button onClick=${v.dSubmit} disabled=${v.dSending} style=${`width:100%;padding:15px;border-radius:100px;border:none;background:#5B37F0;color:#fff;font-family:inherit;font-weight:600;font-size:15px;cursor:${v.dSending ? 'default' : 'pointer'};opacity:${v.dSending ? 0.6 : 1};transition:background .2s ease,transform .2s ease,opacity .2s ease`} style-hover="background:#4B2BC9" style-active="transform:scale(.98)">${v.dSending ? 'Enviando…' : 'Solicitar demo'}</button>
           </div>
         ` : null}
         ${v.d3 ? html`
@@ -1012,6 +1034,7 @@ ${v.demoOpen ? html`
   }
 }
 
-Kupo.defaultProps = { headline: 'B', animateHero: true, displayFont: 'Unbounded', demoUrl: '' };
+// sheetsUrl: Google Apps Script web app URL that stores demo requests (see README).
+Kupo.defaultProps = { headline: 'B', animateHero: true, displayFont: 'Unbounded', demoUrl: '', sheetsUrl: '' };
 
 render(html`<${Kupo} />`, document.getElementById('app'));
